@@ -1,7 +1,6 @@
 #/bin/bash
 
-set -o errexit
-set -o pipefail
+set -eo pipefail
 
 alembic upgrade head
 python -m app.main
