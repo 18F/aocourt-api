@@ -1,0 +1,65 @@
+[
+    {
+        "id": 13,
+        "title": "Wilson v. Chaney",
+        "date_filed": "2007-05-03",
+        "date_entered": "2007-05-03",
+        "docket_entries":[
+            {"text": "ANSWER to Complaint by Marcia Chaney. (SGP)", "sequence_no": 7, "date_filed": "2007-03-05", "case_id": "13", "sealed": false, "entry_type": "answer"},
+            {"text": "Summons Issued as to Marcia Chaney.  (SGP)", "sequence_no": 9, "date_filed": "2007-03-05", "case_id": "13", "sealed": false, "entry_type": "service"},
+            {"text": "Minute Entry for proceedings held before Judge Nathan J Nine:.  Admissions due by 3/7/2007.  Contempt Hearing set for 3/8/2007 01:30 PM in Courtroom 1 before Samantha C Sigma.  Discovery due by 3/9/2007.  Motions due by 3/12/2007.  (SGP)", "sequence_no": 11, "date_filed": "2007-03-05", "case_id": "13", "sealed": false, "entry_type": "minute"},
+            {"text": "ANSWER to Complaint with Jury Demand by Marcia Chaney. (SGP)", "sequence_no": 13, "date_filed": "2007-03-05", "case_id": "13", "sealed": false, "entry_type": "answer"},
+            {"text": "MOTION to Appoint Expert by Marcia Chaney. Motions referred to Nathan J Nine.  (SGP)", "sequence_no": 15, "date_filed": "2007-03-05", "case_id": "13", "sealed": false, "entry_type": "motion"},
+            {"text": "RESPONSE to Motion re [4] MOTION to Appoint Expert filed by Cheryl Anne Wilson.  (SGP)", "sequence_no": 17, "date_filed": "2007-03-05", "case_id": "13", "sealed": false, "entry_type": "resp"},
+            {"text": "MOTION to Produce by Cheryl Anne Wilson. Motions referred to Nathan J Nine.  (SGP)", "sequence_no": 20, "date_filed": "2007-03-05", "case_id": "13", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Dismiss by Marcia Chaney. Motions referred to Nathan J Nine. Responses due by 3/9/2007 (SGP)", "sequence_no": 22, "date_filed": "2007-03-05", "case_id": "13", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION for Discovery by Cheryl Anne Wilson. Motions referred to Nathan J Nine.  (SGP)", "sequence_no": 24, "date_filed": "2007-03-07", "case_id": "13", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Appoint Expert by Marcia Chaney. Motions referred to Nathan J Nine.  (SGP)", "sequence_no": 26, "date_filed": "2007-03-07", "case_id": "13", "sealed": false, "entry_type": "motion"},
+            {"text": "ORDER denying [7] Motion to Dismiss (SGP)", "sequence_no": 28, "date_filed": "2007-03-07", "case_id": "13", "sealed": false, "entry_type": "order"},
+            {"text": "ORDER denying [4] Motion to Appoint Expert; denying [9] Motion to Appoint Expert (SGP)", "sequence_no": 30, "date_filed": "2007-03-07", "case_id": "13", "sealed": false, "entry_type": "order"},
+            {"text": "Minute Entry for proceedings held before Judge Nathan J Nine:.  Cross Motions due by 3/14/2007.  Discovery due by 3/16/2007.  Motions due by 3/16/2007.  Discovery Hearing set for 3/26/2007 07:45 AM in Courtroom 1 before Samantha C Sigma.  Jury Trial ", "sequence_no": 33, "date_filed": "2007-03-07", "case_id": "13", "sealed": false, "entry_type": "minute"},
+            {"text": "set for 4/2/2007 08:30 AM in Courtroom 1 before Samantha C Sigma.  (Court Reporter Ness.) (SGP)", "sequence_no": 33, "date_filed": "2007-03-07", "case_id": "13", "sealed": false, "entry_type": "minute"},
+            {"text": "ANSWER to Complaint with Jury Demand by Marcia Chaney. (SGP)", "sequence_no": 35, "date_filed": "2007-03-07", "case_id": "13", "sealed": false, "entry_type": "answer"}
+        ]
+    },
+    {
+        "id": 60,
+        "title": "Burns vs. Shelley",
+        "date_filed": "2007-05-03",
+        "date_entered": "2007-05-03",
+        "docket_entries": [
+            {"text": "COMPLAINT against Elizabeth Barrett Browning (Filing fee &#036; 350.), filed by William Butler Yeats. (Jarvie, Eric)", "sequence_no": 6, "date_filed": "2007-03-05", "case_id": "60", "sealed": false, "entry_type": "cmp"},
+            {"text": "Summons Issued as to Robert Burns.  (Jarvie, Eric)", "sequence_no": 8, "date_filed": "2007-03-05", "case_id": "60", "sealed": false, "entry_type": "service"},
+            {"text": "ANSWER to [1] Complaint with Jury Demand, COUNTERCLAIM against William Butler Yeats by Robert Burns. (Attachments: # (1) Affidavit # (2) Affidavit # (3) Affidavit) (Keats, John)", "sequence_no": 12, "date_filed": "2007-03-05", "case_id": "60", "sealed": false, "entry_type": "answer"},
+            {"text": "MOTION to Appoint Expert, MOTION to Continue, MOTION for Disclosure, MOTION for Discovery by Emily Dickinson. Motions referred to Travis F Ten.  (Shakespeare, William)", "sequence_no": 19, "date_filed": "2007-03-05", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "COMPLAINT against Robert Burns ( Filing fee &#36; 350 receipt number 1111123456.), filed by William Butler Yeats. (Shakespeare, William)", "sequence_no": 26, "date_filed": "2007-03-05", "case_id": "60", "sealed": false, "entry_type": "cmp"},
+            {"text": "MOTION to Appoint Expert by William Butler Yeats. Motions referred to Travis F Ten.  (Jarvie, Eric)", "sequence_no": 28, "date_filed": "2007-03-05", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "COMPLAINT against Robert Burns (Filing fee &#036; 350.), filed by William Butler Yeats. (Jarvie, Eric)", "sequence_no": 30, "date_filed": "2007-03-05", "case_id": "60", "sealed": false, "entry_type": "cmp"},
+            {"text": "Seal SetDocumentAccess(256) by William Butler Yeats. Motions referred to Travis F Ten.  (Shakespeare, William)", "sequence_no": 32, "date_filed": "2007-03-07", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Appoint Expert by William Butler Yeats. Motions referred to Travis F Ten.  (Jarvie, Eric)", "sequence_no": 34, "date_filed": "2007-03-13", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION for Bill of Costs by Robert Burns. Motions referred to Travis F Ten.  (Attachments: # (1) Appendix Attachment 1)", "sequence_no": 36, "date_filed": "2007-04-16", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION for Bill of Costs by Robert Burns. Motions referred to Travis F Ten.", "sequence_no": 38, "date_filed": "2007-04-16", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION for Bill of Costs by Robert Burns. Motions referred to Travis F Ten.", "sequence_no": 40, "date_filed": "2007-04-17", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION for Bill of Costs by Robert Burns. Motions referred to Travis F Ten.", "sequence_no": 42, "date_filed": "2007-04-17", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION for Bill of Costs by Robert Burns. Motions referred to Travis F Ten.", "sequence_no": 44, "date_filed": "2007-04-17", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Appoint Expert. Motions referred to case referral judge.  (Jarvie, Eric)", "sequence_no": 46, "date_filed": "2007-04-26", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "ORDER granting [6] Motion to Appoint Expert; granting [10] Motion for Bill of Costs (Jarvie, Eric)", "sequence_no": 48, "date_filed": "2007-04-26", "case_id": "60", "sealed": false, "entry_type": "order"},
+            {"text": " MOTION to Appoint Expert by Ted Matthews, Mike Krzyzewski, George Mason, John Adams, Raplh King, Joseph Allen, Bradford W McClanahan, Richard Manuel, Yung Mann, Wilhelm Leibnitz, Larry W Little, James Madison. Motions referred to case referral judge", "sequence_no": 51, "date_filed": "2007-05-03", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": ".  (SP)", "sequence_no": 51, "date_filed": "2007-05-03", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION for Bond by Emily Dickinson. Motions referred to Travis F Ten.", "sequence_no": 53, "date_filed": "2007-05-14", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION for Leave to Appear, MOTION to Appoint Expert, MOTION for Disclosure, MOTION for Discovery, MOTION to Dismiss ( Responses due by 5/30/2007) by William Butler Yeats. Motions referred to case referral judge.  (Jarvie, EAJ)", "sequence_no": 56, "date_filed": "2007-05-29", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Appoint Expert by William Blake. Motions referred to case referral judge.  (Jarvie, Eric)", "sequence_no": 62, "date_filed": "2008-03-31", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION for Leave to Appear, MOTION to Appoint Expert, MOTION for Disclosure, MOTION for Discovery, MOTION to Dismiss ( Responses due by 4/13/2008) by Elizabeth Barrett Browning. Motions referred to case referral judge.  (Jarvie, Eric)", "sequence_no": 64, "date_filed": "2008-03-31", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Appoint Expert by Emily Dickinson. Motions referred to Travis F Ten.  (Jarvie, Eric)", "sequence_no": 70, "date_filed": "2008-03-31", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Appoint Custodian, MOTION to Appoint Expert by William Blake. Motions referred to case referral judge.  (Jarvie, Eric)", "sequence_no": 72, "date_filed": "2008-03-31", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Appoint Expert, MOTION for Certificate of Appealability, MOTION to Change Venue, MOTION to Compel, MOTION to Consolidate Cases, MOTION to Continue, MOTION for Declaration of Mistrial, MOTION for Declaratory Judgment ( Responses due by 4/14", "sequence_no": 75, "date_filed": "2008-04-01", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "/2008), MOTION for Bill of Costs, MOTION to Bifurcate, MOTION for Attorney Fees by William Blake. Motions referred to case referral judge.  (Jarvie, Eric)", "sequence_no": 75, "date_filed": "2008-04-01", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Appoint Expert, MOTION to Approve Consent Judgment, MOTION for Disclosure, MOTION for Discovery, MOTION in Limine, MOTION to Intervene by William Blake. Motions referred to case referral judge.  (Jarvie, Eric)", "sequence_no": 87, "date_filed": "2008-04-01", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Appoint Expert by William Blake. Motions referred to case referral judge.  (Jarvie, Eric)", "sequence_no": 94, "date_filed": "2008-04-14", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "MOTION to Appoint Expert by Robert Burns. Motions referred to Travis F Ten.  (Jarvie, Eric)", "sequence_no": 96, "date_filed": "2008-05-09", "case_id": "60", "sealed": false, "entry_type": "motion"},
+            {"text": "TRANSCRIPT of Proceedings (Jarvie, Eric)", "sequence_no": 98, "date_filed": "2008-06-02", "case_id": "60", "sealed": false, "entry_type": "oth_evt"},
+            {"text": "Minute Entry for proceedings held before Albert B Alpha: Filip B Fifteen and Travis F Ten no longer assigned to case..  (MacAdie, Patrick)", "sequence_no": 100, "date_filed": "2008-08-05", "case_id": "60", "sealed": false, "entry_type": "minute"}
+        ]
+    }
+] 
+  
