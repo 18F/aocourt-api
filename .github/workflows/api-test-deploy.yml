@@ -46,4 +46,3 @@ jobs:
           cf_password: ${{ secrets.CG_PASSWORD }}
           cf_org: sandbox-gsa
           cf_space: mark.meyer
-          cf_manifest: api/manifest.yml
