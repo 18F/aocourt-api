@@ -1,1 +1,1 @@
-web: api/bin/run.sh
+web: bin/run.sh
