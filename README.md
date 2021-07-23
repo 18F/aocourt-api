@@ -2,6 +2,16 @@
 
 This is a small API service to support the AO's E&I.
 
+## Requirements  
+To run locally you will need access to Python 3.6 or higher. You will also need access to a database like PostgreSQL, although SQLite, available on most systems, will work for local development and tests.
+
+For development, some familiarity with the following libraries will be helpful:
+- [SLQAlchemy](https://www.sqlalchemy.org): Database ORM (with the help of [Alembic](https://alembic.sqlalchemy.org/en/latest/) for DB migrations)
+- [Ariadne](https://ariadne.readthedocs.io/en/0.3.0/): provides GraphQL support
+- [FastAPI](https://fastapi.tiangolo.com): Web/API framework
+- [Pydantic](https://pydantic-docs.helpmanual.io): Data validation and managing configuration/settings
+
+
 ## Installing locally  
 To avoid installing dependencies in your global environment, create a virtual environment. You can replace `.venv` to any path where you want the environment files to live (just make sure you `source` the right place in the next step). However, placing it in the root directory of the project and naming it `.venv` will make some editors like VSCode load it automatically. 
 
