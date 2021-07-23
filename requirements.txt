@@ -1,4 +1,5 @@
 fastapi==0.65.2
+gunicorn==20.1.0
 uvicorn[standard]
 python-multipart
 python-jose[cryptography]

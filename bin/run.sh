@@ -3,4 +3,4 @@
 set -eo pipefail
 
 alembic upgrade head
-python -m app.main
+gunicorn app.main:app -w 2 -k uvicorn.workers.UvicornWorker 
