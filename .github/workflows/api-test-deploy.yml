@@ -35,7 +35,7 @@ jobs:
           DATABASE_URL_TEST: "postgresql://postgres:postgres@localhost:5432/postgres"
   deploy: 
     runs-on: ubuntu-latest
-    needs: run-tests
+    needs: pre-deploy-tests
     steps:
       - uses: actions/checkout@v2
       - name: Deploy to cloud.gov
