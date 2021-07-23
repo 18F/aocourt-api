@@ -2,10 +2,8 @@ name: run-api-tests-action
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 jobs:
-  run-tests:
+  pre-deploy-tests:
     runs-on: ubuntu-latest
     services:
       postgres:
