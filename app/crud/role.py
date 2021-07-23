@@ -2,7 +2,7 @@ from typing import Optional, Any
 
 from sqlalchemy.orm import Session
 
-from app.schemas import RoleCreate
+from app.schemas import RoleInput
 from app.models import Role
 
 
@@ -16,7 +16,7 @@ class CrudRole:
     def get_by_name(self, db: Session, rolename: Any) -> Optional[Role]:
         return db.query(Role).filter(Role.rolename == rolename).first()
 
-    def create(self, db: Session, role: RoleCreate) -> Role:
+    def create(self, db: Session, role: RoleInput) -> Role:
         db_role = Role(**role.dict())
         db.add(db_role)
         db.commit()

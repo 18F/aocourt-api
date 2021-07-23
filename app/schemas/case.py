@@ -1,5 +1,5 @@
 import datetime
-from .docket_entry import DocketEntry, DocketEntryCreate
+from .docket_entry import DocketEntry, DocketEntryInput
 from typing import List, Literal, Union
 
 from pydantic import BaseModel
@@ -14,6 +14,7 @@ class CaseBase(BaseModel):
     title: str
     date_filed: datetime.date
     sealed: bool = False
+    type: CourtType
 
     class Config:
         orm_mode = True
@@ -24,7 +25,7 @@ class CaseInput(CaseBase):
     Docket entries won't have things like IDs until
     they are in the DB.
     '''
-    docket_entries: List[DocketEntryCreate] = []
+    docket_entries: List[DocketEntryInput] = []
 
 
 class AppellateCaseInput(CaseInput):

@@ -15,7 +15,7 @@ class DocketEntryBase(BaseModel):
         orm_mode = True
 
 
-class DocketEntryCreate(DocketEntryBase):
+class DocketEntryInput(DocketEntryBase):
     pass
 
 
