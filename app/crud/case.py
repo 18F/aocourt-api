@@ -1,3 +1,4 @@
+from app.schemas.case import CaseInput
 from typing import Optional, Any, Union
 
 from sqlalchemy.orm import Session, contains_eager
@@ -13,8 +14,13 @@ class CrudCase:
     def get(self, db: Session, id: Any) -> Optional[Union[DistrictCase, AppellateCase]]:
         return db.query(Case).filter(Case.id == id).one_or_none()
 
+    def create(self, db: Session, case: CaseInput) -> Case:
+        db_case = Case(**case.dict())
+        db.add(db_case)
+        db.commit()
+        return db_case
+
     def set_sealed(self, db: Session, id: Any, sealed: Any) -> Optional[Union[DistrictCase, AppellateCase]]:
-        print(id, sealed)
         case = db.query(Case).filter(Case.id == id).one_or_none()
         if case is not None:
             case.sealed = sealed

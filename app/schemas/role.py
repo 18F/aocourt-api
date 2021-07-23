@@ -5,7 +5,7 @@ class RoleBase(BaseModel):
     rolename: str
 
 
-class RoleCreate(RoleBase):
+class RoleInput(RoleBase):
     pass
 
 

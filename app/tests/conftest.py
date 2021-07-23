@@ -1,4 +1,5 @@
 from typing import Generator, Any
+from datetime import datetime
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
@@ -8,8 +9,9 @@ from app.main import app
 from app.core.config import settings
 from app.db import Base, get_db
 from sqlalchemy.orm import sessionmaker
-from app.schemas import UserInput
-from app.crud import user
+from app.schemas import UserInput, CaseInput
+from app.crud import user, case
+from app.core.enums import CourtType
 
 
 engine = create_engine(settings.DATABASE_URL_TEST)
@@ -61,3 +63,14 @@ def default_user(db_session: Session):
         roles=[]
     )
     return user.create(db_session, test_user)
+
+
+@pytest.fixture()
+def simple_case(db_session: Session):
+    case_in = CaseInput(
+        title="Godzilla v. Mothra",
+        date_filed=datetime.now(),
+        sealed=True,
+        type=CourtType.district
+    )
+    return case.create(db_session, case_in)
