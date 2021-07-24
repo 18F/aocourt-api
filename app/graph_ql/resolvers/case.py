@@ -1,7 +1,6 @@
 from typing import List
 
 from ariadne import ObjectType, InterfaceType
-from ariadne.types import GraphQLResolveInfo
 from app.schemas import DocketEntry, Case, DistrictCase, AppellateCase
 
 case = InterfaceType("Case")
@@ -18,7 +17,7 @@ def case_result_type(obj, *_):
 
 
 @case.field("docketEntries")
-def resolve_docket_entries(obj: Case, info: GraphQLResolveInfo) -> List[DocketEntry]:
+def resolve_docket_entries(obj: Case, *_) -> List[DocketEntry]:
     # at the moment the crud query grabs the whole docket, so this is convenient
     # this will probably change
     return obj.docket_entries
