@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     GRAPHQL_ENDPOINT: str = "/graphql"
     PROJECT_NAME: str = "AO Backend"
     SECRET_KEY: str = "123"
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+    BACKEND_CORS_ORIGINS: List[str] = ['*']
     ACCESS_TOKEN_EXPIRE_MINUTES = 60
     DATABASE_URL: str = "sqlite://"
     DATABASE_URL_TEST: str = "sqlite://"
