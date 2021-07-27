@@ -35,6 +35,7 @@ interface Case {
     docketEntries: [DocketEntry!]!
     type: CourtType!
     sealed: Boolean
+    court: String
 }
 
 type DistrictCase implements Case {
@@ -45,6 +46,7 @@ type DistrictCase implements Case {
     docketEntries: [DocketEntry!]!
     type: CourtType!
     sealed: Boolean
+    court: String
 }
 
 type AppellateCase implements Case {
@@ -56,6 +58,7 @@ type AppellateCase implements Case {
     type: CourtType!
     sealed: Boolean
     originalCaseId: Int
+    court: String
 }
 
 type DocketEntry {
