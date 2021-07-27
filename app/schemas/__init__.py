@@ -9,3 +9,4 @@ from .user import UserInput, User
 from .role import Role, RoleInput
 from .case import Case, CaseInput, DistrictCase, AppellateCase, AppellateCaseInput
 from .docket_entry import DocketEntry, DocketEntryInput
+from .court import Court

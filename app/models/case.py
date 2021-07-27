@@ -15,6 +15,7 @@ class Case(TimeStamps, Base):
     sealed = Column(Boolean, default=False)
     docket_entries = relationship("DocketEntry", cascade="all, delete")
     type = Column(String)
+    court = Column(String)
 
     __mapper_args__ = {
         'polymorphic_on': type,

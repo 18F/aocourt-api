@@ -1,6 +1,6 @@
 import datetime
 from .docket_entry import DocketEntry, DocketEntryInput
-from typing import List, Literal, Union
+from typing import List, Literal, Union, Optional
 
 from pydantic import BaseModel
 from app.core.enums import CourtType
@@ -15,6 +15,7 @@ class CaseBase(BaseModel):
     date_filed: datetime.date
     sealed: bool = False
     type: CourtType
+    court: Optional[str] = None
 
     class Config:
         orm_mode = True

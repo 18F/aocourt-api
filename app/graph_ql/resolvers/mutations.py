@@ -10,4 +10,5 @@ mutation = MutationType()
 def resolve_seal_case(obj, info, caseId, sealed):
     session = info.context['request'].state.db
     modified_case = case.set_sealed(session, caseId, sealed)
-    return parse_obj_as(Case, modified_case)
+    if modified_case is not None:
+        return parse_obj_as(Case, modified_case)
