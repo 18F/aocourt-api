@@ -2,6 +2,7 @@ scalar Datetime
 
 type Query {
     case(id: Int!): Case
+    court(id: String!): Court
 }
 
 type Mutation {
@@ -12,6 +13,12 @@ type Mutation {
     – or null if the case was not found
     """
     sealCase(caseId: Int!, sealed: Boolean): Case
+
+    """
+    Resets the testing database's seed data back to it's initial state
+    Any mutations made to the data will be reset.
+    """
+    resetSeedData: Boolean
 }
 
 enum CourtType{
@@ -57,4 +64,12 @@ type DocketEntry {
     dateFiled: Datetime
     entryType: String!
     sealed: Boolean!
+}
+
+type Court{
+    id: String!
+    type: CourtType!
+    short_name: String!
+    full_name: String!
+    parent: String
 }
