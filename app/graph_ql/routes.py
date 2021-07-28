@@ -5,7 +5,7 @@ from ariadne.asgi import GraphQL
 from app.db import get_db
 from app.graph_ql import schema
 
-graphql_app = GraphQL(schema, debug=True)
+graphql_app = GraphQL(schema, debug=False)
 graphQL_router = APIRouter()
 
 

@@ -1,5 +1,5 @@
 from typing import List, Union
-from pydantic import BaseSettings, AnyHttpUrl, validator
+from pydantic import BaseSettings, validator
 
 
 class Settings(BaseSettings):

@@ -71,6 +71,8 @@ def simple_case(db_session: Session):
         title="Godzilla v. Mothra",
         date_filed=datetime.now(),
         sealed=True,
-        type=CourtType.district
+        type=CourtType.district,
+        court="tnmd",
+        docket_entries=[]
     )
     return case.create(db_session, case_in)

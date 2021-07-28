@@ -16,3 +16,7 @@ class CaseType(str, Enum):
     special = "Special"
     multidistrict_litigation = "Multidistrict Litigation"
     grand_jury = "Grand Jury"
+
+
+class CaseStatus(str, Enum):
+    on_appeal = "on_appeal"

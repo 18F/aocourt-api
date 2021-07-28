@@ -9,6 +9,7 @@ case_params = {
     'created_at': datetime.now(),
     'date_filed': datetime.now(),
     'updated_on': datetime.now(),
+    'court': 'tnmd'
 }
 
 docket_params = {
