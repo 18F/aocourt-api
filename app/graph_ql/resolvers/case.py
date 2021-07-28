@@ -1,7 +1,8 @@
-from typing import List
+from typing import List, Optional
 
 from ariadne import ObjectType, InterfaceType
-from app.schemas import DocketEntry, Case, DistrictCase, AppellateCase
+from app.schemas import DocketEntry, Case, DistrictCase, AppellateCase, Court
+from app.core.courts import courts
 
 case = InterfaceType("Case")
 docketentry = ObjectType("DocketEntry")
@@ -21,3 +22,10 @@ def resolve_docket_entries(obj: Case, *_) -> List[DocketEntry]:
     # at the moment the crud query grabs the whole docket, so this is convenient
     # this will probably change
     return obj.docket_entries
+
+
+@case.field("court")
+def resolve_court(obj: Case, *_) -> Optional[Court]:
+    if obj.court:
+        court = courts[obj.court]
+        return Court(**court, id=obj.court)

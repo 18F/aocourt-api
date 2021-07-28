@@ -19,6 +19,18 @@ type Mutation {
     Any mutations made to the data will be reset.
     """
     resetSeedData: Boolean
+    """
+    Send a case with the given caseId to the appellate court. 
+    If recievingCourtId is null, the appellate court will be sent to the 
+    circuit court where the original case it.
+    Returns:
+    - The appellate case
+    Errors:
+    – Case cannot be found
+    - receivingCourt can not be determined 
+    - Case has already been sent to appellate
+    """
+    createAppealCase(caseId: Int!, recievingCourtId: String): Case
 }
 
 enum CourtType{
@@ -35,7 +47,7 @@ interface Case {
     docketEntries: [DocketEntry!]!
     type: CourtType!
     sealed: Boolean
-    court: String
+    court: Court!
 }
 
 type DistrictCase implements Case {
@@ -46,7 +58,7 @@ type DistrictCase implements Case {
     docketEntries: [DocketEntry!]!
     type: CourtType!
     sealed: Boolean
-    court: String
+    court: Court!
 }
 
 type AppellateCase implements Case {
@@ -58,7 +70,7 @@ type AppellateCase implements Case {
     type: CourtType!
     sealed: Boolean
     originalCaseId: Int
-    court: String
+    court: Court!
 }
 
 type DocketEntry {
