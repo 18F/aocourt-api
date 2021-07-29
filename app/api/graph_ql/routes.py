@@ -3,7 +3,7 @@ from starlette.requests import Request
 from sqlalchemy.orm import Session
 from ariadne.asgi import GraphQL
 from app.data.database import get_db
-from app.graph_ql import schema
+from . import schema
 
 graphql_app = GraphQL(schema, debug=False)
 graphQL_router = APIRouter()

@@ -3,7 +3,7 @@ from ariadne import QueryType
 from ariadne.types import GraphQLResolveInfo
 
 from app.data import case
-from app.schemas import Case, Court
+from app.entities import Case, Court
 from app.core.courts import courts
 
 

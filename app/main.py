@@ -7,7 +7,7 @@ from starlette.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.api.api_v1.api import api_router
 from app.docs.api_metadata import tags_metadata
-from app.graph_ql.routes import graphQL_router
+from app.api.graph_ql.routes import graphQL_router
 
 
 app = FastAPI(

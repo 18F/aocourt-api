@@ -2,7 +2,7 @@ from typing import Optional, Any
 
 from sqlalchemy.orm import Session
 
-from app.schemas import RoleInput
+from app.entities import RoleInput
 from ..role.role import Role_DTO
 
 

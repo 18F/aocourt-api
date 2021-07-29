@@ -7,6 +7,8 @@ from .role import Role
 class UserBase(BaseModel):
     email: EmailStr
     roles: List[Role] = []
+    full_name: str
+    username: str
 
 
 # password is only on the schema when creating user
@@ -18,8 +20,6 @@ class UserInput(UserBase):
 class User(UserBase):
     id: int
     is_active: bool
-    full_name: str
-    user_name: str
     hashed_password: str
 
     class Config:

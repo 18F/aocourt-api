@@ -2,7 +2,7 @@ from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 from pydantic import parse_obj_as
 
-from app.schemas.user import User
+from app.entities import User
 from app.data.database import Base
 from ..role.role import association_table
 from ..mixins import TimeStamps
@@ -19,4 +19,5 @@ class User_DTO(TimeStamps, Base):
     roles = relationship("Role_DTO", secondary=association_table)
 
     def to_entity(self) -> User:
+        print("Self", self.email, self.id, self.full_name)
         return parse_obj_as(User, self)

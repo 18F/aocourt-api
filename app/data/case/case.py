@@ -5,7 +5,7 @@ from pydantic import parse_obj_as
 from app.data.database import Base
 from app.core.enums import CourtType
 from ..mixins import TimeStamps
-from app.schemas.case import Case as Case_Type
+from app.entities.case import Case
 
 
 class Case_DTO(TimeStamps, Base):
@@ -24,8 +24,8 @@ class Case_DTO(TimeStamps, Base):
         'polymorphic_identity': 'case'
     }
 
-    def to_entity(self) -> Case_Type:
-        return parse_obj_as(Case_Type, self)
+    def to_entity(self) -> Case:
+        return parse_obj_as(Case, self)
 
 
 class DistrictCase_DTO(Case_DTO):

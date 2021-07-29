@@ -3,7 +3,7 @@ These DB functions are only here to help reset data quickly during development.
 There is [probably] no reason to have them after initial dev work
 '''
 import json
-from app.schemas import CaseInput as Case_Validator
+from app.entities import CaseInput
 from sqlalchemy.orm import Session
 
 from .case.case import DistrictCase_DTO, Case_DTO
@@ -27,7 +27,7 @@ class CaseDevUtil:
         with open(CASE_DATA_PATH, 'r') as case_file:
             cases = json.load(case_file)
             for case in cases:
-                c = Case_Validator(**case)
+                c = CaseInput(**case)
                 c.docket_entries = [DocketEntry_DTO(**d.dict()) for d in c.docket_entries]
                 db_case = DistrictCase_DTO(**c.dict())
                 db.add(db_case)

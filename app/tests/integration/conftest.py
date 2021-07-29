@@ -9,7 +9,7 @@ from app.main import app
 from app.core.config import settings
 from app.data.database import Base, get_db
 from sqlalchemy.orm import sessionmaker
-from app.schemas import UserInput, CaseInput
+from app.entities import UserInput, CaseInput
 from app.data import user, case
 from app.core.enums import CourtType
 
@@ -60,6 +60,8 @@ def default_user(db_session: Session):
     test_user = UserInput(
         email=settings.INITIAL_ADMIN_USER,
         password=settings.INITIAL_ADMIN_PASSWORD,
+        full_name="Test User",
+        username="user.test",
         roles=[]
     )
     return user.create(db_session, test_user)

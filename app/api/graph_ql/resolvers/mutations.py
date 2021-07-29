@@ -1,7 +1,7 @@
 from ariadne import MutationType
 from pydantic import parse_obj_as
 from app.data import case
-from app.schemas import Case
+from app.entities import Case
 
 mutation = MutationType()
 

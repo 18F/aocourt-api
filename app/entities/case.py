@@ -4,7 +4,7 @@ from typing import List, Literal, Union, Optional
 
 from pydantic import BaseModel
 from app.core.enums import CourtType, CaseStatus
-from app.schemas.court import Court
+from .court import Court
 from app.core.courts import courts
 
 
@@ -82,6 +82,7 @@ class AppellateCaseInput(CaseInput):
 
     @classmethod
     def from_district_case(cls, district_case, receiving_court_id: str):
+        '''Create a new appellate case from a district case'''
         if receiving_court_id is None:
             receiving_court_id = courts[district_case.court]['parent']
 

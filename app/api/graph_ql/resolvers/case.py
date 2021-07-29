@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from ariadne import ObjectType, InterfaceType
-from app.schemas import DocketEntry, Case, DistrictCase, AppellateCase, Court
+from app.entities import DocketEntry, Case, DistrictCase, AppellateCase, Court
 from app.core.courts import courts
 
 case = InterfaceType("Case")

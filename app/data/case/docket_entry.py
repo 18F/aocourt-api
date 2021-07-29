@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Integer, String, ForeignKey
 from sqlalchemy.sql.sqltypes import DateTime
 from pydantic import parse_obj_as
-from app.schemas.case import DocketEntry as DocketEntry_Type
+from app.entities import DocketEntry
 from app.data.database import Base
 from ..mixins import TimeStamps
 
@@ -16,5 +16,5 @@ class DocketEntry_DTO(TimeStamps, Base):
     entry_type = Column(String, nullable=False)
     sealed = Column(Boolean, default=False)
 
-    def to_entity(self) -> DocketEntry_Type:
-        return parse_obj_as(DocketEntry_Type, self)
+    def to_entity(self) -> DocketEntry:
+        return parse_obj_as(DocketEntry, self)

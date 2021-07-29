@@ -2,7 +2,7 @@ from typing import Any, Union
 
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
-from app.schemas import DistrictCase, AppellateCase
+from app.entities import DistrictCase, AppellateCase
 from app.api import dependency
 from app.data import case
 from app.data.database import get_db

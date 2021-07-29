@@ -1,6 +1,6 @@
 from datetime import datetime
-from app.graph_ql.resolvers.case import case_result_type, resolve_docket_entries
-from app.schemas import DistrictCase, AppellateCase, DocketEntry
+from app.api.graph_ql.resolvers.case import case_result_type, resolve_docket_entries
+from app.entities import DistrictCase, AppellateCase, DocketEntry
 
 
 case_params = {

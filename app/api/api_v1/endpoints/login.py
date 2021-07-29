@@ -4,8 +4,8 @@ from typing import Any
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import OAuth2PasswordRequestForm
-
-from app import schemas, data
+from app.entities import Token
+from app import data
 from app.core.config import settings
 from app.core import security
 from app.data.database import get_db
@@ -13,7 +13,7 @@ from app.data.database import get_db
 router = APIRouter()
 
 
-@router.post("/login/access-token", response_model=schemas.Token, summary="Get an access token")
+@router.post("/login/access-token", response_model=Token, summary="Get an access token")
 def login_access_token(
     db: Session = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()
 ) -> Any:

@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 
 from app.data import user, role
 from app.core.config import settings
-from app.schemas import UserInput, Role
+from app.entities import UserInput, Role
 from .database import Base
 
 
@@ -25,7 +25,9 @@ def init_db(db: Session) -> None:
         user_in = UserInput(
             email=settings.INITIAL_ADMIN_USER,
             password=settings.INITIAL_ADMIN_PASSWORD,
-            roles=[admin_role, clerk_role]
+            roles=[admin_role, clerk_role],
+            full_name="Initial Admin",
+            username="admin"
         )
 
         initial = user.create(db, user=user_in)  # noqa: F841
