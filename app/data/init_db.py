@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
-from app.data_service import user, role
+from app.data import user, role
 from app.core.config import settings
 from app.schemas import UserInput, Role
-from app.db import Base
+from .database import Base
 
 
 def init_db(db: Session) -> None:

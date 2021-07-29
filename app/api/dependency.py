@@ -7,9 +7,10 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
-from app import models, schemas, data_service
+from app.data import User_DTO, user
+from app.schemas import TokenPayload
 from app.core import security
-from app.db import get_db
+from app.data.database import get_db
 
 reusable_oauth2 = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_STR}/login/access-token"
@@ -18,25 +19,25 @@ reusable_oauth2 = OAuth2PasswordBearer(
 
 def get_current_user(
     db: Session = Depends(get_db), token: str = Depends(reusable_oauth2)
-) -> models.User:
+) -> User_DTO:
     try:
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
         )
-        token_data = schemas.TokenPayload(**payload)
+        token_data = TokenPayload(**payload)
     except (jwt.JWTError, ValidationError):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Could not validate credentials",
         )
-    user = data_service.user.get(db, id=token_data.sub)
-    if not user:
+    current_user = user.get(db, id=token_data.sub)
+    if not current_user:
         raise HTTPException(status_code=404, detail="User not found")
-    return user
+    return current_user
 
 
-def get_current_active_user(current_user: models.User = Depends(get_current_user)) -> models.User:
-    if not data_service.user.is_active(current_user):
+def get_current_active_user(current_user: User_DTO = Depends(get_current_user)) -> User_DTO:
+    if not user.is_active(current_user):
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
 
@@ -45,7 +46,7 @@ class AllowRoles():
     def __init__(self, roles: Iterable[str]):
         self.autorized_roles = list(roles)
 
-    def __call__(self, user: models.User = Depends(get_current_active_user)) -> models.User:
+    def __call__(self, user: User_DTO = Depends(get_current_active_user)) -> User_DTO:
         if not any(role.rolename in self.autorized_roles for role in user.roles):
             raise HTTPException(status_code=403, detail="Operation not permitted")
         return user

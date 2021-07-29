@@ -7,10 +7,10 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from app.main import app
 from app.core.config import settings
-from app.db import Base, get_db
+from app.data.database import Base, get_db
 from sqlalchemy.orm import sessionmaker
 from app.schemas import UserInput, CaseInput
-from app.data_service import user, case
+from app.data import user, case
 from app.core.enums import CourtType
 
 

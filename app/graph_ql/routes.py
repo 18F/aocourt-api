@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from starlette.requests import Request
 from sqlalchemy.orm import Session
 from ariadne.asgi import GraphQL
-from app.db import get_db
+from app.data.database import get_db
 from app.graph_ql import schema
 
 graphql_app = GraphQL(schema, debug=False)

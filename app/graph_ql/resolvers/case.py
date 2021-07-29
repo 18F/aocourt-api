@@ -19,7 +19,7 @@ def case_result_type(obj, *_):
 
 @case.field("docketEntries")
 def resolve_docket_entries(obj: Case, *_) -> List[DocketEntry]:
-    # at the moment the data_service query grabs the whole docket, so this is convenient
+    # at the moment the data query grabs the whole docket, so this is convenient
     # this will probably change
     return obj.docket_entries
 

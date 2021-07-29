@@ -5,10 +5,10 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 
-from app import schemas, data_service
+from app import schemas, data
 from app.core.config import settings
 from app.core import security
-from app.db import get_db
+from app.data.database import get_db
 
 router = APIRouter()
 
@@ -20,7 +20,7 @@ def login_access_token(
     '''
     Exchange name and password credentials for a JWT.
     '''
-    user = data_service.user.authenticate(
+    user = data.user.authenticate(
         db, email=form_data.username, password=form_data.password
     )
 

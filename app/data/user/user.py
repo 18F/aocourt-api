@@ -1,12 +1,14 @@
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
+from pydantic import parse_obj_as
 
-from app.db.database import Base
-from .roles import association_table
-from .mixins import TimeStamps
+from app.schemas.user import User
+from app.data.database import Base
+from ..role.role import association_table
+from ..mixins import TimeStamps
 
 
-class User(TimeStamps, Base):
+class User_DTO(TimeStamps, Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String)
@@ -14,4 +16,7 @@ class User(TimeStamps, Base):
     full_name = Column(String)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
-    roles = relationship("Role", secondary=association_table)
+    roles = relationship("Role_DTO", secondary=association_table)
+
+    def to_entity(self) -> User:
+        return parse_obj_as(User, self)

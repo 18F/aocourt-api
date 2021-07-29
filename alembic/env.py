@@ -19,7 +19,7 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from app.db.database import Base  # noqa 401
+from app.data import Base  # noqa 401
 import app.models                 # noqa 401
 target_metadata = Base.metadata
 

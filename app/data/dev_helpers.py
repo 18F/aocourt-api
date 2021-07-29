@@ -6,7 +6,8 @@ import json
 from app.schemas import CaseInput as Case_Validator
 from sqlalchemy.orm import Session
 
-from app.models import DistrictCase, Case, DocketEntry
+from .case.case import DistrictCase_DTO, Case_DTO
+from .case.docket_entry import DocketEntry_DTO
 
 CASE_DATA_PATH = "./seed_data/case.json"
 
@@ -14,8 +15,8 @@ CASE_DATA_PATH = "./seed_data/case.json"
 class CaseDevUtil:
     def delete_all(self, db: Session) -> bool:
         '''Deletes all cases from Database -- only for development'''
-        db.query(DocketEntry).delete()
-        db.query(Case).delete()
+        db.query(DocketEntry_DTO).delete()
+        db.query(Case_DTO).delete()
         db.commit()
         return True
 
@@ -27,8 +28,8 @@ class CaseDevUtil:
             cases = json.load(case_file)
             for case in cases:
                 c = Case_Validator(**case)
-                c.docket_entries = [DocketEntry(**d.dict()) for d in c.docket_entries]
-                db_case = DistrictCase(**c.dict())
+                c.docket_entries = [DocketEntry_DTO(**d.dict()) for d in c.docket_entries]
+                db_case = DistrictCase_DTO(**c.dict())
                 db.add(db_case)
             db.commit()
         return True

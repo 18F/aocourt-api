@@ -5,6 +5,7 @@ from typing import List, Literal, Union, Optional
 from pydantic import BaseModel
 from app.core.enums import CourtType, CaseStatus
 from app.schemas.court import Court
+from app.core.courts import courts
 
 
 class CaseBase(BaseModel):
@@ -29,16 +30,6 @@ class CaseInput(CaseBase):
     '''
     docket_entries: List[DocketEntryInput] = []
     type: CourtType
-
-
-class AppellateCaseInput(CaseInput):
-    '''
-    Appleate cases need a few extra things at creating time
-    '''
-    type: CourtType = CourtType.appellate
-    original_case_id: int
-    reviewed: bool = False
-    remanded: bool = False
 
 
 # After cases are in the Database they will have properties
@@ -78,6 +69,29 @@ class AppellateCase(_Case):
 
     def validate_appeal(self, court: Court) -> None:
         pass
+
+
+class AppellateCaseInput(CaseInput):
+    '''
+    Appleate cases need a few extra things at creating time
+    '''
+    type: CourtType = CourtType.appellate
+    original_case_id: int
+    reviewed: bool = False
+    remanded: bool = False
+
+    @classmethod
+    def from_district_case(cls, district_case, receiving_court_id: str):
+        if receiving_court_id is None:
+            receiving_court_id = courts[district_case.court]['parent']
+
+        receiving_court = Court(id=receiving_court_id, **courts[receiving_court_id])
+        appellate_case = cls(
+            **district_case.dict(exclude={'id', 'type', 'court'}),
+            original_case_id=district_case.id,
+            court=receiving_court.id
+        )
+        return appellate_case
 
 
 Case = Union[DistrictCase, AppellateCase, BankruptcyCase]

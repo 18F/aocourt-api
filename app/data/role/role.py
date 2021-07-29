@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Table, ForeignKey
 
-from app.db.database import Base
+from app.data.database import Base
 
 association_table = Table(
     'user_roles',
@@ -10,7 +10,7 @@ association_table = Table(
 )
 
 
-class Role(Base):
+class Role_DTO(Base):
     __tablename__ = "roles"
     id = Column(Integer, primary_key=True, index=True)
     rolename = Column(String, unique=True, index=True)
