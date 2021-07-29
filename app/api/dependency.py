@@ -7,7 +7,7 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
-from app import models, schemas, crud
+from app import models, schemas, data_service
 from app.core import security
 from app.db import get_db
 
@@ -29,14 +29,14 @@ def get_current_user(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Could not validate credentials",
         )
-    user = crud.user.get(db, id=token_data.sub)
+    user = data_service.user.get(db, id=token_data.sub)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
 
 
 def get_current_active_user(current_user: models.User = Depends(get_current_user)) -> models.User:
-    if not crud.user.is_active(current_user):
+    if not data_service.user.is_active(current_user):
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
 

@@ -2,7 +2,7 @@ from typing import Any, Optional
 from ariadne import QueryType
 from ariadne.types import GraphQLResolveInfo
 from pydantic import parse_obj_as
-from app.crud import case
+from app.data_service import case
 from app.schemas import Case, Court
 from app.core.courts import courts
 

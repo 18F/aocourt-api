@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
-from app.crud import user, role
+from app.data_service import user, role
 from app.core.config import settings
 from app.schemas import UserInput, Role
 from app.db import Base

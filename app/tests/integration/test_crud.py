@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from app.crud import case
+from app.data_service import case
 from app.core.enums import CourtType, CaseStatus
 
 

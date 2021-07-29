@@ -10,7 +10,7 @@ from app.core.config import settings
 from app.db import Base, get_db
 from sqlalchemy.orm import sessionmaker
 from app.schemas import UserInput, CaseInput
-from app.crud import user, case
+from app.data_service import user, case
 from app.core.enums import CourtType
 
 

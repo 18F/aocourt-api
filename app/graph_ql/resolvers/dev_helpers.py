@@ -1,5 +1,5 @@
 from ariadne import MutationType
-from app.crud.dev_helpers import case_dev_util
+from app.data_service.dev_helpers import case_dev_util
 
 dev_mutation = MutationType()
 

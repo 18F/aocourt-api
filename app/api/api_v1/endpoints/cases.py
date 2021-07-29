@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from app.schemas import DistrictCase, AppellateCase
 from app.models import User
 from app.api import dependency
-from app.crud import case
+from app.data_service import case
 from app.db import get_db
 
 router = APIRouter()
