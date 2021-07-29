@@ -7,7 +7,7 @@ from app.core.config import settings
 
 uri = settings.DATABASE_URL
 
-engine = create_engine(uri)
+engine = create_engine(uri, echo=True)
 
 # Note: use "check_same_thread" for SQLite. ie:
 '''

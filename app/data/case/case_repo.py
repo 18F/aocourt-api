@@ -21,6 +21,12 @@ class CrudCase:
         if found_case:
             return found_case.to_entity()
 
+    def add(self, db: Session, case):
+        dto = db.query(Case_DTO).get(case.id)
+        for k, v in case.dict().items():
+            setattr(dto, k, v)
+        db.add(dto)
+
     def create(self, db: Session, case: CaseInput) -> Case_DTO:
         db_case = Case_DTO(**case.dict())
         db.add(db_case)
@@ -32,7 +38,6 @@ class CrudCase:
         if case is not None:
             case.sealed = sealed
             db.add(case)
-            db.commit()
             return case.to_entity()
 
     def create_appeal_case(self, db: Session, id: Any, receiving_court=None) -> Case:

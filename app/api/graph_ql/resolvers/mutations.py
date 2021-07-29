@@ -9,9 +9,13 @@ mutation = MutationType()
 @mutation.field("sealCase")
 def resolve_seal_case(obj, info, caseId, sealed):
     session = info.context['request'].state.db
-    modified_case = case.set_sealed(session, caseId, sealed)
-    if modified_case is not None:
-        return parse_obj_as(Case, modified_case)
+    original_case = case.get(session, id=caseId)
+    if original_case is None:
+        return
+    original_case.seal(sealed)
+    case.set_sealed(session, caseId, original_case.sealed)
+    session.commit()
+    return original_case
 
 
 @mutation.field("createAppealCase")

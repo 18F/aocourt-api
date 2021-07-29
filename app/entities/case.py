@@ -1,11 +1,13 @@
 import datetime
 from .docket_entry import DocketEntry, DocketEntryInput
-from typing import List, Literal, Union, Optional
+from typing import List, Literal, Union, Optional, TypeVar
 
 from pydantic import BaseModel
 from app.core.enums import CourtType, CaseStatus
 from .court import Court
 from app.core.courts import courts
+
+T = TypeVar('T', bound='CaseBase')
 
 
 class CaseBase(BaseModel):
@@ -21,6 +23,10 @@ class CaseBase(BaseModel):
 
     class Config:
         orm_mode = True
+
+    def seal(self: T, sealed: bool) -> T:
+        self.sealed = sealed
+        return self
 
 
 class CaseInput(CaseBase):
