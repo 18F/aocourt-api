@@ -4,8 +4,8 @@ transforming objects into known formats.
 '''
 
 from .token import Token, TokenPayload
-from .user import UserInput, User
-from .role import Role, RoleInput
-from .case import Case, CaseInput, DistrictCase, AppellateCase, AppellateCaseInput
-from .docket_entry import DocketEntry, DocketEntryInput
+from .user import User
+from .role import Role
+from .case import Case, DistrictCase, AppellateCase, CaseType
+from .docket_entry import DocketEntry
 from .court import Court

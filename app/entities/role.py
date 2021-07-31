@@ -1,16 +1,7 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 
-class RoleBase(BaseModel):
-    rolename: str
-
-
-class RoleInput(RoleBase):
-    pass
-
-
-class Role(RoleBase):
+@dataclass
+class Role():
     id: int
-
-    class Config:
-        orm_mode = True
+    rolename: str

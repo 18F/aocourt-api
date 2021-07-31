@@ -1,57 +1,35 @@
 import datetime
-from .docket_entry import DocketEntry, DocketEntryInput
 from typing import List, Literal, Union, Optional, TypeVar
+from dataclasses import dataclass, field
+from .docket_entry import DocketEntry
 
-from pydantic import BaseModel
 from app.core.enums import CourtType, CaseStatus
 from .court import Court
 from app.core.courts import courts
 
-T = TypeVar('T', bound='CaseBase')
+T = TypeVar('T', bound='Case')
 
 
-class CaseBase(BaseModel):
-    '''
-    Shared properties. All cases need these
-    even when first creating them.
-    '''
+@dataclass
+class Case():
+    id: int = field(init=False)
     title: str
-    date_filed: datetime.date
-    sealed: bool = False
     court: str
-    status: Optional[str] = None
-
-    class Config:
-        orm_mode = True
+    date_filed: datetime.date
+    status: Optional[str]
+    created_at: datetime.datetime = field(init=False)
+    updated_on: datetime.datetime = field(init=False)
 
     def seal(self: T, sealed: bool) -> T:
         self.sealed = sealed
         return self
 
 
-class CaseInput(CaseBase):
-    '''
-    Docket entries won't have things like IDs until
-    they are in the DB.
-    '''
-    docket_entries: List[DocketEntryInput] = []
-    type: CourtType
-
-
-# After cases are in the Database they will have properties
-# like ID and the datetime created. These should be returned
-# to the API caller.
-
-class _Case(CaseBase):
-    id: int
-    created_at: datetime.datetime
-    updated_on: datetime.datetime
-    docket_entries: List[DocketEntry] = []
-    type: CourtType
-
-
-class DistrictCase(_Case):
-    type: Literal[CourtType.district]
+@dataclass
+class DistrictCase(Case):
+    docket_entries: List[DocketEntry] = field(default_factory=list)
+    type: Literal[CourtType.district] = field(init=False, default=CourtType.district)
+    sealed: bool = False
 
     def validate_appeal(self, court: Court) -> None:
         if self.status == CaseStatus.on_appeal:
@@ -60,45 +38,50 @@ class DistrictCase(_Case):
             raise ValueError(f"Can not appeal to {court.full_name}")
 
 
-class BankruptcyCase(_Case):
-    type: Literal[CourtType.bankruptcy]
+@dataclass
+class BankruptcyCase(Case):
+    docket_entries: List[DocketEntry] = field(default_factory=list)
+    type: Literal[CourtType.bankruptcy] = field(init=False, default=CourtType.bankruptcy)
+    sealed: bool = False
 
     def validate_appeal(self, court: Court) -> None:
         pass
 
 
-class AppellateCase(_Case):
-    type: Literal[CourtType.appellate]
+@dataclass
+class AppellateCase(Case):
     original_case_id: int
+    docket_entries: List[DocketEntry] = field(default_factory=list)
+    type: Literal[CourtType.appellate] = field(init=False, default=CourtType.appellate)
+    sealed: bool = False
     reviewed: bool = False
     remanded: bool = False
 
     def validate_appeal(self, court: Court) -> None:
         pass
-
-
-class AppellateCaseInput(CaseInput):
-    '''
-    Appleate cases need a few extra things at creating time
-    '''
-    type: CourtType = CourtType.appellate
-    original_case_id: int
-    reviewed: bool = False
-    remanded: bool = False
 
     @classmethod
-    def from_district_case(cls, district_case, receiving_court_id: str):
+    def from_district_case(cls, district_case, receiving_court_id: Optional[str] = None):
         '''Create a new appellate case from a district case'''
         if receiving_court_id is None:
-            receiving_court_id = courts[district_case.court]['parent']
+            court_id = courts[district_case.court]['parent']
+            receiving_court = Court(id=court_id, **courts[court_id])
+        else:
+            receiving_court = Court(id=receiving_court_id, **courts[receiving_court_id])
 
-        receiving_court = Court(id=receiving_court_id, **courts[receiving_court_id])
+        district_case.validate_appeal(receiving_court)
+
         appellate_case = cls(
-            **district_case.dict(exclude={'id', 'type', 'court'}),
             original_case_id=district_case.id,
-            court=receiving_court.id
+            docket_entries=[d.copy() for d in district_case.docket_entries],
+            title=district_case.title,
+            status=CaseStatus.submitted_for_appeal,
+            court=receiving_court.id,
+            sealed=district_case.sealed,
+            date_filed=datetime.datetime.now(),
+
         )
         return appellate_case
 
 
-Case = Union[DistrictCase, AppellateCase, BankruptcyCase]
+CaseType = Union[DistrictCase, AppellateCase, BankruptcyCase]

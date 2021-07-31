@@ -1,43 +1,74 @@
-from sqlalchemy import Boolean, Column, Integer, String
+import datetime
+from sqlalchemy import Boolean, Column, Integer, String, Table, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.sqltypes import DateTime
-from pydantic import parse_obj_as
-from app.data.database import Base
-from app.core.enums import CourtType
-from ..mixins import TimeStamps
-from app.entities.case import Case
+from ..database import mapper_registry
+from app.entities.case import Case, DocketEntry, DistrictCase, AppellateCase
 
 
-class Case_DTO(TimeStamps, Base):
-    __tablename__ = "cases"
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, nullable=False)
-    date_filed = Column(DateTime)
-    sealed = Column(Boolean, default=False)
-    docket_entries = relationship("DocketEntry_DTO", cascade="all, delete")
-    type = Column(String)
-    court = Column(String)
-    status = Column(String, nullable=True)
+cases_table = Table(
+    'cases',
+    mapper_registry.metadata,
+    Column('id', Integer, primary_key=True, index=True),
+    Column('title', String, nullable=False),
+    Column('date_filed', DateTime),
+    Column('sealed', Boolean, default=False),
+    Column('type', String),
+    Column('court', String),
+    Column('status', String, nullable=True),
+    Column('original_case_id', Integer),
+    Column('reviewed', Boolean, default=False),
+    Column('remanded', Boolean, default=False),
+    Column('created_at', DateTime, default=datetime.datetime.utcnow),
+    Column(
+        'updated_on',
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow
+    )
+)
 
-    __mapper_args__ = {
-        'polymorphic_on': type,
-        'polymorphic_identity': 'case'
-    }
+docket_entry_table = Table(
+    "docket_entries",
+    mapper_registry.metadata,
+    Column('id', Integer, nullable=False, primary_key=True),
+    Column('case_id', Integer, ForeignKey('cases.id'), nullable=False),
+    Column('sequence_no', Integer, nullable=False),
+    Column('text', String, nullable=False),
+    Column('date_filed', DateTime),
+    Column('entry_type', String, nullable=False),
+    Column('sealed', Boolean, default=False),
+    Column('created_at', DateTime, default=datetime.datetime.utcnow),
+    Column(
+        'updated_on',
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow
+    )
+)
 
-    def to_entity(self) -> Case:
-        return parse_obj_as(Case, self)
 
+def run_mappers():
+    mapper_registry.map_imperatively(DocketEntry, docket_entry_table)
 
-class DistrictCase_DTO(Case_DTO):
-    __mapper_args__ = {
-        'polymorphic_identity': CourtType.district
-    }
+    mapper_registry.map_imperatively(
+        Case,
+        cases_table,
+        polymorphic_on=cases_table.c.type,
+        polymorphic_identity="case",
+        properties={
+            'docket_entries': relationship(DocketEntry)
+        }
+    )
 
+    mapper_registry.map_imperatively(
+        DistrictCase,
+        inherits=Case,
+        polymorphic_identity="district"
+    )
 
-class AppellateCase_DTO(Case_DTO):
-    original_case_id = Column(Integer)
-    reviewed = Column(Boolean, default=False)
-    remanded = Column(Boolean, default=False)
-    __mapper_args__ = {
-        'polymorphic_identity': CourtType.appellate
-    }
+    mapper_registry.map_imperatively(
+        AppellateCase,
+        inherits=Case,
+        polymorphic_identity="appellate"
+    )

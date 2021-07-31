@@ -1,9 +1,10 @@
 from typing import Optional
-from pydantic import BaseModel
+from dataclasses import dataclass
 from app.core.enums import CourtType
 
 
-class Court(BaseModel):
+@dataclass(frozen=True)
+class Court():
     '''
     Info on Federal Courts
     '''

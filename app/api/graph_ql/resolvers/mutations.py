@@ -1,7 +1,7 @@
 from ariadne import MutationType
-from pydantic import parse_obj_as
+from app.core.enums import CaseStatus
 from app.data import case
-from app.entities import Case
+from app.entities import AppellateCase
 
 mutation = MutationType()
 
@@ -13,7 +13,7 @@ def resolve_seal_case(obj, info, caseId, sealed):
     if original_case is None:
         return
     original_case.seal(sealed)
-    case.set_sealed(session, caseId, original_case.sealed)
+    case.add(session, original_case)
     session.commit()
     return original_case
 
@@ -25,6 +25,11 @@ def create_appeal_case(obj, info, caseId, recievingCourtId=None):
     if original_case is None:
         raise ValueError(f"Could not find case with id: {caseId}")
 
-    modified_case = case.create_appeal_case(session, caseId, recievingCourtId)
+    modified_case = AppellateCase.from_district_case(original_case)
+
     if modified_case is not None:
-        return parse_obj_as(Case, modified_case)
+        original_case.status = CaseStatus.on_appeal
+        case.add(session, original_case)
+        case.add(session, modified_case)
+        session.commit()
+        return modified_case

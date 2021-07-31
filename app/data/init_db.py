@@ -3,8 +3,9 @@ from sqlalchemy import create_engine
 
 from app.data import user, role
 from app.core.config import settings
-from app.entities import UserInput, Role
-from .database import Base
+from app.entities import User
+from .database import mapper_registry
+from app.core.security import get_password_hash
 
 
 def init_db(db: Session) -> None:
@@ -18,25 +19,27 @@ def init_db(db: Session) -> None:
     '''
     initial = user.get_by_email(db, email=settings.INITIAL_ADMIN_USER)
     if not initial:
-        admin_role = Role.from_orm(role.get_by_name(db, rolename='admin'))
-        clerk_role = Role.from_orm(role.get_by_name(db, rolename='clerk'))
+        admin_role = role.get_by_name(db, rolename='admin')
+        clerk_role = role.get_by_name(db, rolename='clerk')
 
-        ''' How do you get secrets into Cloud.gov '''
-        user_in = UserInput(
+        hashed_password = get_password_hash(settings.INITIAL_ADMIN_PASSWORD)
+        roles = [r for r in (admin_role, clerk_role) if r]
+
+        user_in = User(
             email=settings.INITIAL_ADMIN_USER,
-            password=settings.INITIAL_ADMIN_PASSWORD,
-            roles=[admin_role, clerk_role],
+            hashed_password=hashed_password,
+            roles=roles,
             full_name="Initial Admin",
             username="admin"
         )
-
-        initial = user.create(db, user=user_in)  # noqa: F841
+        user.add(db, user_in)
+        db.commit()
 
 
 def create_tables():
     '''Set up tables for the tests'''
     engine = create_engine(settings.DATABASE_URL)
-    Base.metadata.create_all(engine)
+    mapper_registry.metadata.create_all(engine)
 
 
 if __name__ == "__main__":

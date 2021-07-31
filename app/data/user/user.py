@@ -1,23 +1,43 @@
-from sqlalchemy import Boolean, Column, Integer, String
+import datetime
+from sqlalchemy import Boolean, Column, Integer, String, Table, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-from pydantic import parse_obj_as
 
-from app.entities import User
-from app.data.database import Base
-from ..role.role import association_table
-from ..mixins import TimeStamps
+from ..database import mapper_registry
+from app.entities import User, Role
 
 
-class User_DTO(TimeStamps, Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String)
-    email = Column(String, unique=True, index=True)
-    full_name = Column(String)
-    hashed_password = Column(String)
-    is_active = Column(Boolean, default=True)
-    roles = relationship("Role_DTO", secondary=association_table)
+association_table = Table(
+    'user_roles',
+    mapper_registry.metadata,
+    Column('user_id', Integer, ForeignKey('users.id', ondelete="CASCADE")),
+    Column('role_id', Integer, ForeignKey('roles.id', ondelete="CASCADE"))
+)
 
-    def to_entity(self) -> User:
-        print("Self", self.email, self.id, self.full_name)
-        return parse_obj_as(User, self)
+
+user_table = Table(
+    'users',
+    mapper_registry.metadata,
+    Column('id', Integer, primary_key=True, index=True),
+    Column('username', String),
+    Column('email', String, unique=True, index=True),
+    Column('full_name', String),
+    Column('hashed_password', String),
+    Column('is_active', Boolean, default=True),
+    Column('created_at', DateTime, default=datetime.datetime.utcnow),
+    Column(
+        'updated_on',
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow
+    )
+)
+
+
+def run_mappers():
+    mapper_registry.map_imperatively(
+        User,
+        user_table,
+        properties={
+            'roles': relationship(Role, secondary=association_table)
+        }
+    )

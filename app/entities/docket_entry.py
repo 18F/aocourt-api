@@ -1,27 +1,18 @@
 import datetime
+from dataclasses import dataclass, replace, field
 
-from pydantic import BaseModel
 
-
-# Shared properties
-class DocketEntryBase(BaseModel):
-    text: str
+@dataclass
+class DocketEntry:
+    id: int = field(init=False)
+    case_id: int
     sequence_no: int
-    date_filed: datetime.date
-    sealed: bool = False
+    text: str
+    date_filed: datetime.datetime
     entry_type: str
+    created_at: datetime.datetime = field(init=False)
+    updated_on: datetime.datetime = field(init=False)
+    sealed: bool = False
 
-    class Config:
-        orm_mode = True
-
-
-class DocketEntryInput(DocketEntryBase):
-    pass
-
-
-# Properties to return to client
-class DocketEntry(DocketEntryBase):
-    id: int
-    case_id: str
-    created_at: datetime.datetime
-    updated_on: datetime.datetime
+    def copy(self):
+        return replace(self)

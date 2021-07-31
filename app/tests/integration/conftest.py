@@ -1,3 +1,4 @@
+from app.core.enums import CaseStatus
 from typing import Generator, Any
 from datetime import datetime
 import pytest
@@ -7,12 +8,10 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from app.main import app
 from app.core.config import settings
-from app.data.database import Base, get_db
+from app.data.database import mapper_registry, get_db
 from sqlalchemy.orm import sessionmaker
-from app.entities import UserInput, CaseInput
-from app.data import user, case
-from app.core.enums import CourtType
-
+from app.entities import User, DistrictCase
+from app.core.security import get_password_hash
 
 engine = create_engine(settings.DATABASE_URL_TEST)
 TestSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -21,9 +20,9 @@ TestSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 @pytest.fixture(autouse=True, scope="package")
 def api_app() -> Generator[FastAPI, Any, None]:
     '''Set up tables for the tests'''
-    Base.metadata.create_all(engine)
+    mapper_registry.metadata.create_all(engine)
     yield app
-    Base.metadata.drop_all(engine)
+    mapper_registry.metadata.drop_all(engine)
 
 
 @pytest.fixture
@@ -57,24 +56,31 @@ def client(api_app: FastAPI, db_session: Session) -> Generator[TestClient, Any, 
 
 @pytest.fixture()
 def default_user(db_session: Session):
-    test_user = UserInput(
+    hashed_password = get_password_hash(settings.INITIAL_ADMIN_PASSWORD)
+
+    test_user = User(
         email=settings.INITIAL_ADMIN_USER,
-        password=settings.INITIAL_ADMIN_PASSWORD,
+        hashed_password=hashed_password,
         full_name="Test User",
         username="user.test",
         roles=[]
     )
-    return user.create(db_session, test_user)
+
+    db_session.add(test_user)
+    db_session.commit()
+    return test_user
 
 
 @pytest.fixture()
 def simple_case(db_session: Session):
-    case_in = CaseInput(
+    case_in = DistrictCase(
         title="Godzilla v. Mothra",
         date_filed=datetime.now(),
+        status=CaseStatus.new,
         sealed=True,
-        type=CourtType.district,
         court="tnmd",
         docket_entries=[]
     )
-    return case.create(db_session, case_in)
+    db_session.add(case_in)
+    db_session.commit()
+    return case_in

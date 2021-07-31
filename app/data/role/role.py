@@ -1,16 +1,15 @@
-from sqlalchemy import Column, Integer, String, Table, ForeignKey
+from sqlalchemy import Column, Integer, String, Table
 
-from app.data.database import Base
+from ..database import mapper_registry
+from app.entities import Role
 
-association_table = Table(
-    'user_roles',
-    Base.metadata,
-    Column('user_id', Integer, ForeignKey('users.id', ondelete="CASCADE")),
-    Column('role_id', Integer, ForeignKey('roles.id', ondelete="CASCADE"))
+role_table = Table(
+    "roles",
+    mapper_registry.metadata,
+    Column('id', Integer, primary_key=True, index=True),
+    Column('rolename', String, unique=True, index=True)
 )
 
 
-class Role_DTO(Base):
-    __tablename__ = "roles"
-    id = Column(Integer, primary_key=True, index=True)
-    rolename = Column(String, unique=True, index=True)
+def run_mappers():
+    mapper_registry.map_imperatively(Role, role_table)

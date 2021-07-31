@@ -1,26 +1,15 @@
-from typing import List
+from typing import List, Optional
+from dataclasses import dataclass, field
 
-from pydantic import BaseModel, EmailStr
 from .role import Role
 
 
-class UserBase(BaseModel):
-    email: EmailStr
-    roles: List[Role] = []
+@dataclass
+class User():
+    email: str
     full_name: str
     username: str
-
-
-# password is only on the schema when creating user
-# it should never appear in other schemas.
-class UserInput(UserBase):
-    password: str
-
-
-class User(UserBase):
-    id: int
-    is_active: bool
     hashed_password: str
-
-    class Config:
-        orm_mode = True
+    id: Optional[int] = None
+    is_active: bool = True
+    roles: List[Role] = field(default_factory=list)

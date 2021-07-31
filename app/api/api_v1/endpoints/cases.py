@@ -1,8 +1,7 @@
-from typing import Any, Union
+from typing import Any
 
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
-from app.entities import DistrictCase, AppellateCase
 from app.api import dependency
 from app.data import case
 from app.data.database import get_db
@@ -11,7 +10,7 @@ router = APIRouter()
 clerk = dependency.AllowRoles(['clerk'])
 
 
-@router.get("/{case_id}", response_model=Union[AppellateCase, DistrictCase])
+@router.get("/{case_id}")
 def read_items(
     case_id: int,
     db: Session = Depends(get_db)
