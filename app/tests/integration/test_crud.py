@@ -12,3 +12,4 @@ def test_appeal_case(db_session: Session, simple_case) -> None:
     appeal = AppellateCase.from_district_case(simple_case, 'ca9')
     assert appeal.type == CourtType.appellate
     assert appeal.original_case_id == simple_case.id
+    assert appeal.id != simple_case.id
