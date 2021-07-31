@@ -16,7 +16,6 @@ def resolve_case(obj: Any, info: GraphQLResolveInfo, id) -> Optional[Case]:
     case_data = case.get(session, id)
     if case_data:
         return case_data
-        # return parse_obj_as(Case, case_data)
 
 
 @query.field("court")

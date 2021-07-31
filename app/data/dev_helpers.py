@@ -25,9 +25,8 @@ class CaseDevUtil:
         with open(CASE_DATA_PATH, 'r') as case_file:
             cases = json.load(case_file)
             for case in cases:
+                case['docket_entries'] = [DocketEntry(**d) for d in case['docket_entries']]
                 c = DistrictCase(**case)
-                # c.docket_entries = [DocketEntry(**d.dict()) for d in c.docket_entries]
-                # db_case = DistrictCase(**c.dict())
                 db.add(c)
             db.commit()
         return True
