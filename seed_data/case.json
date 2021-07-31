@@ -1,11 +1,9 @@
 [
     {
-        "id": 13,
         "title": "Wilson v. Chaney",
         "date_filed": "2007-05-03",
-        "date_entered": "2007-05-03",
-        "type": "district",
         "court": "tnmd",
+        "status": "new",
         "docket_entries":[
             {"text": "ANSWER to Complaint by Marcia Chaney. (SGP)", "sequence_no": 7, "date_filed": "2007-03-05", "case_id": "13", "sealed": false, "entry_type": "answer"},
             {"text": "Summons Issued as to Marcia Chaney.  (SGP)", "sequence_no": 9, "date_filed": "2007-03-05", "case_id": "13", "sealed": false, "entry_type": "service"},
@@ -25,12 +23,10 @@
         ]
     },
     {
-        "id": 60,
         "title": "Burns vs. Shelley",
         "date_filed": "2007-05-03",
-        "date_entered": "2007-05-03",
-        "type": "district",
         "court": "tnmd",
+        "status": "new",
         "docket_entries": [
             {"text": "COMPLAINT against Elizabeth Barrett Browning (Filing fee &#036; 350.), filed by William Butler Yeats. (Jarvie, Eric)", "sequence_no": 6, "date_filed": "2007-03-05", "case_id": "60", "sealed": false, "entry_type": "cmp"},
             {"text": "Summons Issued as to Robert Burns.  (Jarvie, Eric)", "sequence_no": 8, "date_filed": "2007-03-05", "case_id": "60", "sealed": false, "entry_type": "service"},

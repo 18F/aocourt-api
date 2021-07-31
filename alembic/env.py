@@ -19,9 +19,9 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from app.db.database import Base  # noqa 401
-import app.models                 # noqa 401
-target_metadata = Base.metadata
+from app.data import mapper_registry  # noqa 401
+
+target_metadata = mapper_registry.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

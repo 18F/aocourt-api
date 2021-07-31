@@ -19,4 +19,6 @@ class CaseType(str, Enum):
 
 
 class CaseStatus(str, Enum):
-    on_appeal = "on_appeal"
+    new = "new"
+    on_appeal = "on_appeal",
+    submitted_for_appeal = "appeal_submitted"
