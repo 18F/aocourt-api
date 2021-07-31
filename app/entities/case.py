@@ -1,8 +1,8 @@
 import datetime
 from typing import List, Literal, Union, Optional, TypeVar
 from dataclasses import dataclass, field
-from .docket_entry import DocketEntry
 
+from .docket_entry import DocketEntry
 from app.core.enums import CourtType, CaseStatus
 from .court import Court
 from app.core.courts import courts
