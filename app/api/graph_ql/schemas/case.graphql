@@ -90,5 +90,4 @@ type Court{
     short_name: String!
     full_name: String!
     parent: String
-    lowerCourts: [Court]!
 }

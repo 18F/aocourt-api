@@ -3,7 +3,7 @@
 This is a small API service to support the AO's E&I.
 
 ## Requirements  
-To run locally you will need access to Python 3.6 or higher. You will also need access to the database PostgreSQL.
+To run locally you will need access to Python 3.6 or higher. You will also need access to a database like PostgreSQL, although SQLite, available on most systems, will work for local development and tests.
 
 For development, some familiarity with the following libraries will be helpful:
 - [SLQAlchemy](https://www.sqlalchemy.org): Database ORM (with the help of [Alembic](https://alembic.sqlalchemy.org/en/latest/) for DB migrations)
