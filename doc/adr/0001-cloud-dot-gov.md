@@ -1,4 +1,4 @@
-# 1. Use of cloud.gov
+# 1. Hosting on cloud.gov
 
 Date: 2021-08-09
 
