@@ -28,7 +28,7 @@ fake_courts = {
 }
 
 
-@patch('app.api.graph_ql.resolvers.court_resolvers.courts', fake_courts)
+@patch('app.entities.court.courts', fake_courts)
 def test_resolve_lower_courts():
     '''It should resolve to a list of lower courts under the given court'''
     c = Court(**fake_courts['app'], id='app')
@@ -39,7 +39,7 @@ def test_resolve_lower_courts():
     ]
 
 
-@patch('app.api.graph_ql.resolvers.court_resolvers.courts', fake_courts)
+@patch('app.entities.court.courts', fake_courts)
 @pytest.mark.parametrize('court_id', ['app2', 'd1'])
 def test_resolve_no_lower_courts(court_id):
     '''It should resolve to an empty list when there are no lower courts'''

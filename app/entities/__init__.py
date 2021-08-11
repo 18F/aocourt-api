@@ -9,3 +9,4 @@ from .role import Role
 from .case import Case, DistrictCase, AppellateCase, CaseType
 from .docket_entry import DocketEntry
 from .court import Court
+from .record_on_appeal import RecordOnAppeal, RecordOnAppealDocketEntry

@@ -2,7 +2,6 @@ from typing import List, Optional, Union
 
 from ariadne import ObjectType, InterfaceType
 from app.entities import DocketEntry, Case, DistrictCase, AppellateCase, Court
-from app.core.courts import courts
 
 case = InterfaceType("Case")
 docketentry = ObjectType("DocketEntry")
@@ -26,6 +25,4 @@ def resolve_docket_entries(obj: Union[DistrictCase, AppellateCase], *_) -> List[
 
 @case.field("court")
 def resolve_court(obj: Case, *_) -> Optional[Court]:
-    if obj.court:
-        court = courts[obj.court]
-        return Court(**court, id=obj.court)
+    return Court.from_id(obj.court)
