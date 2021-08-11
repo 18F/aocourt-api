@@ -3,6 +3,7 @@ scalar Datetime
 type Query {
     case(id: Int!): Case
     court(id: String!): Court
+    recordOnAppeal(id: Int!): RecordOnAppeal
 }
 
 type Mutation {
@@ -31,12 +32,36 @@ type Mutation {
     - Case has already been sent to appellate
     """
     createAppealCase(caseId: Int!, recievingCourtId: String): Case
+    createRecordOnAppeal(caseId: Int!, recievingCourtId: String): RecordOnAppeal
+    sendRecordOnAppeal(recordOnAppealId: Int!,  receivingCourtId: String!): RecordOnAppeal
 }
 
 enum CourtType{
     district
     appellate
     bankruptcy
+}
+
+type RecordOnAppeal {
+    id: ID!
+    title: String!
+    originalCaseId: Int!
+    createdAt: Datetime!
+    updatedOn: Datetime
+    docketEntries: [RecordOnAppealDocketEntry!]!
+    sealed: Boolean
+    court: Court!
+    receivingCourt: Court
+}
+
+type RecordOnAppealDocketEntry {
+    id: ID!
+    text: String!
+    sequenceNumber: Int!
+    dateFiled: Datetime
+    entryType: String!
+    sealed: Boolean!
+    includeWithAppeal: Boolean!
 }
 
 interface Case {

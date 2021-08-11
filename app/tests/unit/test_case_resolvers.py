@@ -14,6 +14,7 @@ case_params = {
 docket_params = {
     'case_id': 1,
     'text': "round 9",
+    'court': "nysd",
     'sequence_no': 5,
     'date_filed': datetime.now(),
     'entry_type': 'ord'

@@ -2,9 +2,8 @@ from typing import Any, Optional
 from ariadne import QueryType
 from ariadne.types import GraphQLResolveInfo
 
-from app.data import case
-from app.entities import Case, Court
-from app.core.courts import courts
+from app.data import case, record_on_appeal
+from app.entities import Case, Court, RecordOnAppeal
 
 
 query = QueryType()
@@ -18,9 +17,14 @@ def resolve_case(obj: Any, info: GraphQLResolveInfo, id) -> Optional[Case]:
         return case_data
 
 
+@query.field("recordOnAppeal")
+def resolve_roa(obj: Any, info: GraphQLResolveInfo, id) -> Optional[RecordOnAppeal]:
+    session = info.context['request'].state.db
+    roa_data = record_on_appeal.get(session, id)
+    if roa_data:
+        return roa_data
+
+
 @query.field("court")
 def resolve_court(obj: Any, info: GraphQLResolveInfo, id) -> Optional[Court]:
-    court = courts.get(id)
-    if court:
-        court['id'] = id
-        return Court(**court)
+    return Court.from_id(id)
