@@ -9,7 +9,7 @@ from .mutations import mutation
 from .dev_helpers import dev_mutation
 
 resolvers = [
-    query.query,
+    _query,
     mutation,
     dev_mutation,
     case,
