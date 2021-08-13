@@ -1,6 +1,9 @@
 from app.core.enums import CaseStatus
 from datetime import datetime
-from app.api.graph_ql.resolvers.case import case_result_type, resolve_docket_entries
+from app.api.graph_ql.resolvers.case_resolvers import (
+    case_result_type,
+    resolve_docket_entries
+)
 from app.entities import DistrictCase, AppellateCase, DocketEntry
 
 
