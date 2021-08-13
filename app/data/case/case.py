@@ -58,7 +58,11 @@ def run_mappers():
         polymorphic_on=cases_table.c.type,
         polymorphic_identity="case",
         properties={
-            'docket_entries': relationship(DocketEntry)
+            'docket_entries': relationship(
+                DocketEntry,
+                order_by="asc(DocketEntry.sequence_no)"
+
+            )
         }
     )
 

@@ -6,6 +6,12 @@ type Query {
     recordOnAppeal(id: Int!): RecordOnAppeal
 }
 
+input RecordOnAppealDocketEntryInput {
+    id: ID!
+    sealed: Boolean
+    includeWithAppeal: Boolean
+}
+
 type Mutation {
     """
     Sets the sealed status of the case with the given ID
@@ -49,6 +55,8 @@ type Mutation {
     - The record on appeal object
     """
     sendRecordOnAppeal(recordOnAppealId: Int!,  receivingCourtId: String!): RecordOnAppeal
+
+    editRecordOnAppealItem(docketEntry:RecordOnAppealDocketEntryInput!): RecordOnAppealDocketEntry
 }
 
 enum CourtType{

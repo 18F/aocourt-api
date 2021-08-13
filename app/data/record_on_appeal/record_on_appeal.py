@@ -58,6 +58,9 @@ def run_mappers():
         RecordOnAppeal,
         roa_table,
         properties={
-            'docket_entries': relationship(RecordOnAppealDocketEntry)
+            'docket_entries': relationship(
+                RecordOnAppealDocketEntry,
+                order_by="asc(RecordOnAppealDocketEntry.sequence_no)"
+            )
         }
     )
