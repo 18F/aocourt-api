@@ -31,8 +31,23 @@ type Mutation {
     - receivingCourt can not be determined 
     - Case has already been sent to appellate
     """
-    createAppealCase(caseId: Int!, recievingCourtId: String): Case
-    createRecordOnAppeal(caseId: Int!, recievingCourtId: String): RecordOnAppeal
+    createAppealCase(caseId: Int!, receivingCourtId: String): Case
+
+    """
+    Create a Record on Appeal for the given case. It will not be accessible
+    to the receiving court until it the receiving court it set with  
+    sendRecordOnAppeal
+    Returns:
+    - The record on appeal object
+
+    """
+    createRecordOnAppeal(caseId: Int!): RecordOnAppeal
+    """
+    Sets the appeal court for this record. This should give the appeal court
+    access to the record.
+    Returns:
+    - The record on appeal object
+    """
     sendRecordOnAppeal(recordOnAppealId: Int!,  receivingCourtId: String!): RecordOnAppeal
 }
 

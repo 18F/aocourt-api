@@ -19,7 +19,7 @@ def resolve_seal_case(obj, info, caseId, sealed):
 
 
 @mutation.field("createAppealCase")
-def create_appeal_case(obj, info, caseId, recievingCourtId=None):
+def create_appeal_case(obj, info, caseId, receivingCourtId=None):
     session = info.context['request'].state.db
     original_case = case.get(session, id=caseId)
     if original_case is None:
