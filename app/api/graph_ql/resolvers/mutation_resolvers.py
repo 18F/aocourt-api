@@ -1,6 +1,6 @@
 from ariadne import MutationType
 from app.core.enums import CaseStatus
-from app.data import case, record_on_appeal
+from app.data import case, record_on_appeal, record_on_appeal_docket_entry
 from app.entities import AppellateCase, Court
 
 mutation = MutationType()
@@ -19,7 +19,7 @@ def resolve_seal_case(obj, info, caseId, sealed):
 
 
 @mutation.field("createAppealCase")
-def create_appeal_case(obj, info, caseId, recievingCourtId=None):
+def create_appeal_case(obj, info, caseId, receivingCourtId=None):
     session = info.context['request'].state.db
     original_case = case.get(session, id=caseId)
     if original_case is None:
@@ -64,3 +64,18 @@ def send_roa(obj, info, recordOnAppealId, receivingCourtId):
     record_on_appeal.add(session, roa)
     session.commit()
     return roa
+
+
+@mutation.field("editRecordOnAppealItem")
+def edit_roa_item(obj, info, docketEntry):
+    session = info.context['request'].state.db
+    docket = record_on_appeal_docket_entry.get(session, id=docketEntry['id'])
+    if docket is None:  # TODO this should be an exception
+        raise ValueError(f"Could not find entry with id: {docketEntry['id']}")
+    if 'sealed' in docketEntry:
+        docket.sealed = docketEntry['sealed']
+    if 'includeWithAppeal' in docketEntry:
+        docket.include_with_appeal = docketEntry['includeWithAppeal']
+    record_on_appeal_docket_entry.add(session, docket)
+    session.commit()
+    return docket
