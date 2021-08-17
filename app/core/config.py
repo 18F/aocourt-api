@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     DATABASE_URL_TEST: str = "sqlite://"
     INITIAL_ADMIN_USER: str = "admin@example.com"
     INITIAL_ADMIN_PASSWORD: str = "secret"
+    DEVELOPMENT: bool = False
 
     @validator("DATABASE_URL", pre=True)
     def fix_postgres_url(cls, v: str) -> str:

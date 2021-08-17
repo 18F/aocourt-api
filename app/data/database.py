@@ -6,17 +6,7 @@ from app.core.config import settings
 
 uri = settings.DATABASE_URL
 
-engine = create_engine(uri, echo=True)
-
-# Note: use "check_same_thread" for SQLite. ie:
-'''
-from sqlalchemy.pool import StaticPool
-engine = create_engine(
-    'sqlite:///:memory:',
-    connect_args={'check_same_thread': False},
-    poolclass=StaticPool, echo=True
-)
-'''
+engine = create_engine(uri, echo=settings.DEVELOPMENT)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 mapper_registry = registry()
