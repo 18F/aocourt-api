@@ -19,6 +19,7 @@ user_table = Table(
     mapper_registry.metadata,
     Column('id', Integer, primary_key=True, index=True),
     Column('username', String),
+    Column('court_id', String),
     Column('email', String, unique=True, index=True),
     Column('full_name', String),
     Column('hashed_password', String),
