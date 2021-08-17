@@ -13,3 +13,4 @@ class User():
     id: Optional[int] = None
     is_active: bool = True
     roles: List[Role] = field(default_factory=list)
+    court_id: Optional[str] = None
