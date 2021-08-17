@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from app.data import user, role
 from app.core.config import settings
 from app.entities import User
-from .database import mapper_registry
+from .database import mapper_registry, SessionLocal
 from app.core.security import get_password_hash
 
 
@@ -44,3 +44,5 @@ def create_tables():
 
 if __name__ == "__main__":
     create_tables()
+    db = SessionLocal()
+    init_db(db)

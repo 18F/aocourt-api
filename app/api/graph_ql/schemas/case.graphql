@@ -4,6 +4,7 @@ type Query {
     case(id: Int!): Case
     court(id: String!): Court
     recordOnAppeal(id: Int!): RecordOnAppeal
+    currentuser: User
 }
 
 input RecordOnAppealDocketEntryInput {
@@ -139,4 +140,16 @@ type Court{
     full_name: String!
     parent: String
     lowerCourts: [Court]!
+}
+
+type User {
+    id: ID!
+    full_name: String
+    username: String
+    roles: [Role]!
+}
+
+type Role {
+    id: ID!
+    rolename: String
 }
