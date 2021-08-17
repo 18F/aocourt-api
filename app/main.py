@@ -7,7 +7,8 @@ from starlette.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.api.api_v1.api import api_router
 from app.docs.api_metadata import tags_metadata
-from app.api.graph_ql.routes import graphQL_router
+from app.api.graph_ql.routes_public import graphQL_router_public
+from app.api.graph_ql.routes_private import graphQL_router_private
 
 
 app = FastAPI(
@@ -27,7 +28,9 @@ if settings.BACKEND_CORS_ORIGINS:
 
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
-app.include_router(graphQL_router, prefix=settings.GRAPHQL_ENDPOINT, tags=["GraphQL"])
+app.include_router(graphQL_router_public, prefix=settings.GRAPHQL_ENDPOINT_PUBLIC, tags=["GraphQL"])
+app.include_router(graphQL_router_private, prefix=settings.GRAPHQL_ENDPOINT_PRIVATE, tags=["GraphQL"])
+
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8080))

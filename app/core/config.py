@@ -8,7 +8,9 @@ class Settings(BaseSettings):
     to use evnironmental variables or look in an `.env` file in the main directory.
     '''
     API_V1_STR: str = "/api/v1"
-    GRAPHQL_ENDPOINT: str = "/graphql"
+    GRAPHQL_ENDPOINT_PUBLIC: str = "/graphql"
+    GRAPHQL_ENDPOINT_PRIVATE: str = "/graphql_private"
+
     PROJECT_NAME: str = "AO Backend"
     SECRET_KEY: str = "123"
     BACKEND_CORS_ORIGINS: List[str] = ['*']

@@ -42,3 +42,29 @@ def test_graphql_invalid_query(client: TestClient, db_session: Session, simple_c
     resp = r.json()
     assert 'data' not in resp
     assert resp['errors'] is not None
+
+
+def test_private_graphql_query_no_token(client: TestClient, db_session: Session, simple_case) -> None:
+    '''It should return a 401 error when trying to reach private endpoint without a token'''
+    query = {
+        "query": "{case(id: %d) {title, type}}" % simple_case.id
+    }
+
+    r = client.post("/graphql_private/", data=json.dumps(query), headers=headers)
+    assert r.status_code == 401
+
+
+def test_private_graphql_query_good_token(client: TestClient, db_session: Session, simple_case, admin_token) -> None:
+    '''It should return data with a good token'''
+    query = {
+        "query": "{case(id: %d) {title, type}}" % simple_case.id
+    }
+
+    r = client.post(
+        "/graphql/",
+        data=json.dumps(query),
+        headers={**headers, 'Authorization': f'Bearer {admin_token}'}
+    )
+    assert r.status_code == 200
+    resp = r.json()
+    assert resp['data']['case']['title'] == 'Godzilla v. Mothra'

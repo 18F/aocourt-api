@@ -4,7 +4,7 @@ transforming objects into known formats.
 '''
 
 from .token import Token, TokenPayload
-from .user import User
+from .user import User, PublicUser
 from .role import Role
 from .case import Case, DistrictCase, AppellateCase, CaseType
 from .docket_entry import DocketEntry

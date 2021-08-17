@@ -5,6 +5,14 @@ from .role import Role
 
 
 @dataclass
+class PublicUser():
+    id: int = 0
+    full_name: str = 'public user'
+    username: str = 'public_user'
+    roles: List = field(default_factory=list)
+
+
+@dataclass
 class User():
     email: str
     full_name: str
