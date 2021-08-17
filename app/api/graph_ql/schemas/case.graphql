@@ -147,6 +147,7 @@ type User {
     full_name: String
     username: String
     roles: [Role]!
+    court: Court
 }
 
 type Role {

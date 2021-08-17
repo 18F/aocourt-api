@@ -10,6 +10,7 @@ class PublicUser():
     full_name: str = 'public user'
     username: str = 'public_user'
     roles: List = field(default_factory=list)
+    court_id = None
 
 
 @dataclass
