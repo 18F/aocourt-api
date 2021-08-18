@@ -3,7 +3,7 @@ from ariadne import QueryType
 from ariadne.types import GraphQLResolveInfo
 
 from app.data import case, record_on_appeal
-from app.entities import Case, Court, RecordOnAppeal
+from app.entities import Case, Court, RecordOnAppeal, User
 
 
 query = QueryType()
@@ -28,3 +28,10 @@ def resolve_roa(obj: Any, info: GraphQLResolveInfo, id) -> Optional[RecordOnAppe
 @query.field("court")
 def resolve_court(obj: Any, info: GraphQLResolveInfo, id) -> Optional[Court]:
     return Court.from_id(id)
+
+
+@query.field("currentuser")
+def resolve_current_user(obj: Any, info: GraphQLResolveInfo) -> Optional[User]:
+    user = info.context['request'].state.user
+    if user:
+        return user

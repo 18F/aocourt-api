@@ -11,7 +11,7 @@ from app.core.config import settings
 from app.data.database import mapper_registry, get_db
 from sqlalchemy.orm import sessionmaker
 from app.entities import User, DistrictCase
-from app.core.security import get_password_hash
+from app.core.security import get_password_hash, create_access_token
 
 engine = create_engine(settings.DATABASE_URL_TEST)
 TestSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -84,3 +84,8 @@ def simple_case(db_session: Session):
     db_session.add(case_in)
     db_session.commit()
     return case_in
+
+
+@pytest.fixture()
+def admin_token():
+    return create_access_token('1')
